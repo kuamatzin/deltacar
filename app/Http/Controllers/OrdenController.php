@@ -114,7 +114,6 @@ class OrdenController extends Controller
     public function reporte($orden)
     {
         $orden = Orden::findOrFail($orden);
-        dd($orden);
         return view('ordenes.reporte', compact('orden'));
     }
 }

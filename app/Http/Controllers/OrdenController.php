@@ -111,9 +111,10 @@ class OrdenController extends Controller
      * @param  Orden $orden 
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function reporte(Orden $ordenes)
+    public function reporte($orden)
     {
-        dd($ordenes);
-        return view('ordenes.reporte', compact('ordenes'));
+        $orden = Orden::findOrFail($orden);
+        dd($orden);
+        return view('ordenes.reporte', compact('orden'));
     }
 }

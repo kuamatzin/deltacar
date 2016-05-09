@@ -88,7 +88,7 @@
 <hr>
 <h3>Servicios Adicionales</h3>
 <div id="servicios_adicionales">
-@if($ordenes)
+@if($edit)
     @if($ordenes->adicional)
         @foreach($ordenes->adicional as $key => $ad)
             <div id="quitar_{{$key+1}}"><div class="form-group col-md-6"><input type="text" name="adicional[]" value="{{$ad}}" class="form-control" placeholder="Servicio Adicional"></div><div class="form-group col-md-6"><button type="button" class="btn btn-danger" onclick="quitar({{$key+1}})">Quitar</button></div></div>

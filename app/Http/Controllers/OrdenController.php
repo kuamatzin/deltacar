@@ -58,7 +58,8 @@ class OrdenController extends Controller
      */
     public function create()
     {
-        return view('ordenes.create');
+        $edit = false;
+        return view('ordenes.create', compact('edit'));
     }
 
     /**
@@ -82,7 +83,8 @@ class OrdenController extends Controller
      */
     public function edit(Orden $ordenes)
     {
-        return view('ordenes.edit', compact('ordenes'));
+        $edit = true;
+        return view('ordenes.edit', compact('ordenes', 'edit'));
     }
 
     /**

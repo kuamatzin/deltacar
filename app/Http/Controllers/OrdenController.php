@@ -113,6 +113,7 @@ class OrdenController extends Controller
      */
     public function reporte(Orden $ordenes)
     {
+        dd($ordenes->archivo_cotizacion);
         return view('ordenes.reporte', compact('ordenes'));
     }
 }

@@ -6,9 +6,11 @@
 <a href="/ordenes/create">
     <button type="button" class="btn btn-primary">Nueva orden de venta</button>
 </a>
+<br><br>
+<input type="text" name="" id="search" class="form-control" value="" required="required" pattern="" title=""><br>
 <hr>
 <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table table-hover" id="table">
         <thead>
             <tr>
                 <th></th>
@@ -27,7 +29,7 @@
         </thead>
         <tbody>
             @foreach($ordenes as $key => $orden)
-            <tr id="orden_tabla{{$orden->id}}">
+            <tr id="orden_tabla{{$orden->id}}" class="searchable">
                 <td>{{$orden->id}}</td>
                 <td>{{$orden->nombre}}</td>
                 <td>{{$orden->celular}}</td>
@@ -76,6 +78,17 @@
 @endsection
 
 @section('scripts')
+<script>
+    var $rows = $('#table .searchable');
+    $('#search').keyup(function() {
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+        
+        $rows.show().filter(function() {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            return !~text.indexOf(val);
+        }).hide();
+    });
+</script>
 <script>
     $(function () {
         $.ajaxSetup({

@@ -71,12 +71,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="form-group col-md-6">
-        <div class="checkbox{{ $errors->has('aceptado') ? ' has-error' : '' }}">
-            <label for="aceptado">
-                {!! Form::checkbox('aceptado', '1', null, ['id' => 'aceptado']) !!} Aceptado
-            </label>
-        </div>
+    <div class="form-group col-md-6 {{ $errors->has('aceptado') ? ' has-error' : '' }}">
+        {!! Form::label('aceptado', 'Status') !!}
+        {!! Form::select('aceptado', ['' => 'Status', '0' => 'Cotización', '1' => 'Venta'], null, ['id' => 'aceptado', 'class' => 'form-control']) !!}
         <small class="text-danger">{{ $errors->first('aceptado') }}</small>
     </div>
     <div class="form-group col-md-6{{ $errors->has('total') ? ' has-error' : '' }}">

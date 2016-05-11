@@ -30,7 +30,8 @@ class OrdenRequest extends Request
             'marca'      => 'required',
             'modelo'     => 'required',
             'anio'       => 'required',
-            'servicio'   => 'required'
+            'servicio'   => 'required',
+            'aceptado'   => 'required'
         ];
     }
 }

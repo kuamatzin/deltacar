@@ -7,6 +7,7 @@ use App\Http\Requests\OrdenRequest;
 use App\Orden;
 use App\Services\ReportGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class OrdenController extends Controller
 {
@@ -95,6 +96,9 @@ class OrdenController extends Controller
      */
     public function update(Orden $ordenes, OrdenRequest $request)
     {
+        File::delete('reportes/' .  $ordenes->archivo_cotizacion);
+        $report_generator = new ReportGenerator;
+        $request['archivo_cotizacion'] = $report_generator->createReport($request, $this->incluye);
         $ordenes->update($request->all());
         return redirect('ordenes');
     }

@@ -22,6 +22,7 @@
                 <th>Servicio</th>
                 <th>Cotización</th>
                 <th>Reporte</th>
+                <th>Descargar reporte</th>
                 <th>Ver detalle</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
@@ -37,10 +38,15 @@
                 <td>{{$orden->marca}}</td>
                 <td>{{$orden->modelo}}</td>
                 <td>{{$orden->servicio}}</td>
-                <td>{{$orden->cotizacion}}</td>
+                <td>${{$orden->cotizacion}}</td>
                 <td>
                     <a href="/reporte/{{$orden->id}}">
                         <button type="button" class="btn btn-info">Reporte</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="/reporte/descarga/{{$orden->id}}">
+                        <button type="button" class="btn btn-success">Descargar</button>
                     </a>
                 </td>
                 <td>

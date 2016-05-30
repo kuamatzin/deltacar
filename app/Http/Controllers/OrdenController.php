@@ -120,4 +120,14 @@ class OrdenController extends Controller
         $orden = Orden::findOrFail($orden);
         return view('ordenes.reporte', compact('orden'));
     }
+
+    /**
+     * Download order report
+     * @param  Orden $orden
+     */
+    public function descargaReporte($orden)
+    {
+        $orden = Orden::findOrFail($orden);
+        return response()->download('reportes/' . $orden->archivo_cotizacion);
+    }
 }

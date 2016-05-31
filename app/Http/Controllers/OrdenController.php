@@ -8,6 +8,7 @@ use App\Orden;
 use App\Services\ReportGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use RobbieP\CloudConvertLaravel\Facades\CloudConvert;
 
 class OrdenController extends Controller
 {
@@ -72,6 +73,7 @@ class OrdenController extends Controller
     {
         $report_generator = new ReportGenerator;
         $request['archivo_cotizacion'] = $report_generator->createReport($request, $this->incluye);
+        CloudConvert::file('reportes/' . $request['archivo_cotizacion'] . '.docx')->to('pdf');
         Orden::create($request->all());
 
         return redirect('ordenes');
@@ -99,6 +101,7 @@ class OrdenController extends Controller
         File::delete('reportes/' .  $ordenes->archivo_cotizacion);
         $report_generator = new ReportGenerator;
         $request['archivo_cotizacion'] = $report_generator->createReport($request, $this->incluye);
+        $pdf = CloudConvert::file('reportes/' . $request['archivo_cotizacion'] . '.docx')->to('pdf');
         $ordenes->update($request->all());
         return redirect('ordenes');
     }
@@ -128,6 +131,6 @@ class OrdenController extends Controller
     public function descargaReporte($orden)
     {
         $orden = Orden::findOrFail($orden);
-        return response()->download('reportes/' . $orden->archivo_cotizacion);
+        return response()->download('reportes/' . $orden->archivo_cotizacion . '.pdf');
     }
 }

@@ -54,6 +54,6 @@ class ReportGenerator
         }
         $uniqueId = time().'-'.mt_rand();
         $document->saveAs("reportes/$uniqueId-cotizacion.docx");
-        return "$uniqueId-cotizacion.docx";
+        return "$uniqueId-cotizacion";
     }
 }

@@ -19,7 +19,6 @@
                 <th>Email</th>
                 <th>Marca</th>
                 <th>Modelo</th>
-                <th>Servicio</th>
                 <th>Cotización</th>
                 <th>Reporte</th>
                 <th>Descargar reporte</th>
@@ -37,7 +36,6 @@
                 <td>{{$orden->email}}</td>
                 <td>{{$orden->marca}}</td>
                 <td>{{$orden->modelo}}</td>
-                <td>{{$orden->servicio}}</td>
                 <td>${{$orden->cotizacion}}</td>
                 <td>
                     <a href="/reporte/{{$orden->id}}">

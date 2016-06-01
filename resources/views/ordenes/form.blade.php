@@ -59,11 +59,6 @@
     </div>
 </div>
 <div class="row">
-    <div class="form-group col-md-6{{ $errors->has('servicio') ? ' has-error' : '' }}">
-        {!! Form::label('servicio', 'Servicio') !!}
-        {!! Form::select('servicio',['' => 'Selecciona Servicio', 'Afinación Mayor' => 'Afinación Mayor', 'Cambio de Aceite' => 'Cambio de Aceite', 'Frenos' => 'Frenos', 'Acumulador' => 'Acumulador', 'Diagnóstico' => 'Diagnóstico'], null, ['id' => 'servicio', 'class' => 'form-control']) !!}
-        <small class="text-danger">{{ $errors->first('servicio') }}</small>
-    </div>
     <div class="form-group col-md-6{{ $errors->has('cotizacion') ? ' has-error' : '' }}">
         {!! Form::label('cotizacion', 'Cotización') !!}
         {!! Form::text('cotizacion', null, ['class' => 'form-control']) !!}
@@ -83,18 +78,66 @@
     </div>
 </div>
 <hr>
+<h3>Servicios</h3>
+<div id="servicios">
+    @if($edit)
+        @foreach($ordenes->servicio_nombre as $key => $ad)
+            <div id="quitar_{{$key+2}}" class="row"><div class="form-group col-md-4"><select name="servicio_nombre[]" id="inputSer" class="form-control" required="required">
+                <option value="Afinación Mayor" @if($ad == 'Afinación Mayor') selected @endif>Afinación Mayor</option>
+                <option value="Cambio de Aceite" @if($ad == 'Cambio de Aceite') selected @endif>Cambio de Aceite</option>
+                <option value="Frenos" @if($ad == 'Frenos') selected @endif>Frenos</option>
+                <option value="Acumulador" @if($ad == 'Acumulador') selected @endif>Acumulador</option>
+                <option value="Diagnóstico" @if($ad == 'Diagnóstico') selected @endif>Diagnóstico</option>
+            </select></div><div class="form-group col-md-2"><input type="text" name="servicio_cantidad[]" class="form-control" placeholder="Costo" value="{{$ordenes->servicio_cantidad[$key]}}"></div><div class="form-group col-md-2"><input type="text" name="servicio_costo[]" class="form-control" placeholder="Costo" value="{{$ordenes->servicio_costo[$key]}}"></div><div class="form-group col-md-4"><button type="button" class="btn btn-danger" onclick="quitar({{$key+1}})">Quitar</button></div></div>
+        @endforeach
+    @else
+    <div class="row">
+        <div class="form-group col-md-4 {{ $errors->has('servicio_nombre.0') ? ' has-error' : '' }}">
+            <select name="servicio_nombre[]" id="inputSer" class="form-control" required="required">
+                <option value="Afinación Mayor">Afinación Mayor</option>
+                <option value="Cambio de Aceite">Cambio de Aceite</option>
+                <option value="Frenos">Frenos</option>
+                <option value="Acumulador">Acumulador</option>
+                <option value="Diagnóstico">Diagnóstico</option>
+            </select>
+            @if($errors->has('servicio_nombre.0'))
+                <span class="help-block">El campo servicio es obligatorio</span>
+            @endif
+        </div>
+        <div class="form-group col-md-2 {{ $errors->has('servicio_cantidad.0') ? ' has-error' : '' }}">
+            <input type="text" name="servicio_cantidad[]" class="form-control" placeholder="Cantidad" value="{{old('servicio_cantidad.0')}}">
+            @if($errors->has('servicio_cantidad.0'))
+                <span class="help-block">El campo cantidad del servicio es obligatorio</span>
+            @endif
+        </div>
+        <div class="form-group col-md-2 {{ $errors->has('servicio_costo.0') ? ' has-error' : '' }}">
+            <input type="text" name="servicio_costo[]" class="form-control" placeholder="Costo" value="{{old('servicio_costo.0')}}">
+            @if($errors->has('servicio_costo.0'))
+                <span class="help-block">El campo costo del servicio es obligatorio</span>
+            @endif
+        </div>
+        <div class="form-group col-md-4">
+
+        </div>
+    </div>
+    @endif
+</div>
+<div class="form-group">
+    <button type="button" class="btn btn-primary" id="servicio_agregar">Agregar servicio</button>
+</div>
+<hr>
 <h3>Servicios Adicionales</h3>
 <div id="servicios_adicionales">
 @if($edit)
     @if($ordenes->adicional)
         @foreach($ordenes->adicional as $key => $ad)
-            <div id="quitar_{{$key+1}}"><div class="form-group col-md-6"><input type="text" name="adicional[]" value="{{$ad}}" class="form-control" placeholder="Servicio Adicional"></div><div class="form-group col-md-6"><button type="button" class="btn btn-danger" onclick="quitar({{$key+1}})">Quitar</button></div></div>
+            <div id="quitar_{{$key+1}}" class="row"><div class="form-group col-md-4"><input type="text" name="adicional[]" value="{{$ad}}" class="form-control" placeholder="Servicio Adicional"></div><div class="form-group col-md-2"><input type="text" name="adicional_cantidad[]" value="{{$ordenes->adicional_cantidad[$key]}}" class="form-control" placeholder="Cantidad"></div><div class="form-group col-md-2"><input type="text" name="adicional_costo[]" value="{{$ordenes->adicional_costo[$key]}}" class="form-control" placeholder="Costo"></div><div class="form-group col-md-4"><button type="button" class="btn btn-danger" onclick="quitar({{$key+1}})">Quitar</button></div></div>
         @endforeach
     @endif
 @endif
 </div>
 <div class="form-group">
-    <button type="button" class="btn btn-primary" id="agregar">Agregar servicio</button>
+    <button type="button" class="btn btn-primary" id="agregar">Agregar servicio adicional</button>
 </div>
 <hr>
 <div class="form-group">

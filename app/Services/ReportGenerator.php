@@ -39,18 +39,31 @@ class ReportGenerator
         $document = new \PhpOffice\PhpWord\TemplateProcessor('templates/reporte.docx');
         $document->setValue('nombre_cliente', htmlspecialchars($datos->nombre));
         $document->setValue('fecha', htmlspecialchars("$now->day/$now->month/$now->year"));
-        $document->setValue('servicio', htmlspecialchars($datos->servicio));
-        $document->setValue('cantidad', htmlspecialchars('1'));
-        $document->setValue('costo', htmlspecialchars($datos->cotizacion));
         $document->setValue('total', htmlspecialchars($datos->total));
 
-        $document->cloneRow('incluye', count($incluye[$datos->servicio]));
-
+        $document->cloneRow('servicio', count($datos->servicio_nombre));
         $i = 0;
-        foreach ($incluye[$datos->servicio] as $key => $incluye) {    
+        foreach ($datos->servicio_nombre as $key => $servicio_nombre) { 
             $value = $i + 1;
-            $document->setValue("incluye#$value", htmlspecialchars($incluye));
+            $document->setValue("servicio#$value", htmlspecialchars($servicio_nombre));
+            $document->setValue("cantidad#$value", htmlspecialchars($datos->servicio_cantidad[$key]));
+            $document->setValue("costo#$value", htmlspecialchars($datos->servicio_costo[$key]));
+            $listado = '';
+            foreach ($incluye[$servicio_nombre] as $key => $adicional) {
+                $listado = $listado . '* ' . $adicional;
+            }
+            $document->setValue("incluye#$value", htmlspecialchars($listado));
             $i++;
+        }
+
+        $document->cloneRow('servicioA', count($datos->adicional));
+        $f = 0;
+        foreach ($datos->adicional as $key => $adicional) {
+            $value = $f + 1;
+            $document->setValue("servicioA#$value", htmlspecialchars($adicional));
+            $document->setValue("cantidadA#$value", htmlspecialchars($datos->adicional_cantidad[$key]));
+            $document->setValue("costoA#$value", htmlspecialchars($datos->adicional_costo[$key]));
+            $f++;
         }
         $uniqueId = time().'-'.mt_rand();
         $document->saveAs("reportes/$uniqueId-cotizacion.docx");

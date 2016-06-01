@@ -26,7 +26,42 @@ class Orden extends Model
         'aceptado',
         'archivo_cotizacion',
         'total',
+        'adicional_cantidad',
+        'adicional_costo',
+        'servicio_nombre',
+        'servicio_cantidad',
+        'servicio_costo'
     ];
+
+    public function setServicioNombreAttribute($value)
+    {
+        $this->attributes['servicio_nombre'] = serialize($value);
+    }
+
+    public function getServicioNombreAttribute($value)
+    {
+        return unserialize($value);
+    }
+
+    public function setServicioCantidadAttribute($value)
+    {
+        $this->attributes['servicio_cantidad'] = serialize($value);
+    }
+
+    public function getServicioCantidadAttribute($value)
+    {
+        return unserialize($value);
+    }
+
+    public function setServicioCostoAttribute($value)
+    {
+        $this->attributes['servicio_costo'] = serialize($value);
+    }
+
+    public function getServicioCostoAttribute($value)
+    {
+        return unserialize($value);
+    }
 
 
     public function setAdicionalAttribute($value)
@@ -35,6 +70,26 @@ class Orden extends Model
     }
 
     public function getAdicionalAttribute($value)
+    {
+        return unserialize($value);
+    }
+
+    public function setAdicionalCantidadAttribute($value)
+    {
+        $this->attributes['adicional_cantidad'] = serialize($value);
+    }
+
+    public function getAdicionalCantidadAttribute($value)
+    {
+        return unserialize($value);
+    }
+
+    public function setAdicionalCostoAttribute($value)
+    {
+        $this->attributes['adicional_costo'] = serialize($value);
+    }
+
+    public function getAdicionalCostoAttribute($value)
     {
         return unserialize($value);
     }

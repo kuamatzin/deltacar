@@ -98,7 +98,8 @@ class OrdenController extends Controller
      */
     public function update(Orden $ordenes, OrdenRequest $request)
     {
-        File::delete('reportes/' .  $ordenes->archivo_cotizacion);
+        File::delete('reportes/' .  $ordenes->archivo_cotizacion . '.docx');
+        File::delete('reportes/' .  $ordenes->archivo_cotizacion . '.pdf');
         $report_generator = new ReportGenerator;
         $request['archivo_cotizacion'] = $report_generator->createReport($request, $this->incluye);
         $pdf = CloudConvert::file('reportes/' . $request['archivo_cotizacion'] . '.docx')->to('pdf');

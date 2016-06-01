@@ -24,14 +24,11 @@ class OrdenRequest extends Request
     public function rules()
     {
         return [
-            'nombre'     => 'required',
-            'celular'    => 'required|numeric|min:10',
-            'email'      => 'required|email',
-            'marca'      => 'required',
-            'modelo'     => 'required',
-            'anio'       => 'required',
-            'servicio'   => 'required',
-            'aceptado'   => 'required'
+ 
+            'servicio_nombre.*'   => 'required',
+            'servicio_cantidad.*' => 'required|numeric',
+            'servicio_costo.*'    => 'required|numeric',
+            'aceptado'            => 'required'
         ];
     }
 }

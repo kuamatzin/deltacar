@@ -48,12 +48,8 @@
                         <td>{{$ordenes->vin}}</td>
                     </tr>
                     <tr>
-                        <td>Servicio:</td>
-                        <td>{{$ordenes->servicio}}</td>
-                    </tr>
-                    <tr>
                         <td>Cotización:</td>
-                        <td>{{$ordenes->cotizacion}}</td>
+                        <td>${{$ordenes->cotizacion}}</td>
                     </tr>
                     <tr>
                         <td>Total:</td>
@@ -62,15 +58,49 @@
                 </tbody>
             </table>
         </div>
+        <hr>
+        <h2>Servicios</h2>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Costo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($ordenes->servicio_nombre as $key => $servicio_nombre)
+                    <tr>
+                        <td>{{$key+1}}</td>
+                        <td>{{$servicio_nombre}}</td>
+                        <td>{{$ordenes->servicio_cantidad[$key]}}</td>
+                        <td>${{$ordenes->servicio_costo[$key]}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
         @if($ordenes->adicional)
         <h2>Servicios Adicionales</h2>
         <div class="table-responsive">
             <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Costo</th>
+                    </tr>
+                </thead>
                 <tbody>
                      @foreach($ordenes->adicional as $key => $ad)
                     <tr>
                         <td>{{$key + 1 }}</td>
                         <td>{{$ad}}</td>
+                        <td>{{$ordenes->adicional_cantidad[$key]}}</td>
+                        <td>${{$ordenes->adicional_costo[$key]}}</td>
                     </tr>
                     @endforeach
                 </tbody>

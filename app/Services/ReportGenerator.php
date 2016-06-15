@@ -55,15 +55,17 @@ class ReportGenerator
             $document->setValue("incluye#$value", htmlspecialchars($listado));
             $i++;
         }
+        if (count($datos->adicional) > 0) {
+            $document->cloneRow('servicioA', count($datos->adicional));
+            $f = 0;
+            foreach ($datos->adicional as $key => $adicional) {
+                $value = $f + 1;
+                $document->setValue("servicioA#$value", htmlspecialchars($adicional));
+                $document->setValue("cantidadA#$value", htmlspecialchars($datos->adicional_cantidad[$key]));
+                $document->setValue("costoA#$value", htmlspecialchars($datos->adicional_costo[$key]));
+                $f++;
+            }
 
-        $document->cloneRow('servicioA', count($datos->adicional));
-        $f = 0;
-        foreach ($datos->adicional as $key => $adicional) {
-            $value = $f + 1;
-            $document->setValue("servicioA#$value", htmlspecialchars($adicional));
-            $document->setValue("cantidadA#$value", htmlspecialchars($datos->adicional_cantidad[$key]));
-            $document->setValue("costoA#$value", htmlspecialchars($datos->adicional_costo[$key]));
-            $f++;
         }
         $uniqueId = time().'-'.mt_rand();
         $document->saveAs("reportes/$uniqueId-cotizacion.docx");

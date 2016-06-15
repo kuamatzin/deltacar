@@ -36,7 +36,12 @@ class ReportGenerator
     public function createReport($datos, $incluye)
     {
         $now = Carbon::now();
-        $document = new \PhpOffice\PhpWord\TemplateProcessor('templates/reporte.docx');
+        if (count($datos->adicional) > 0) {
+            $document = new \PhpOffice\PhpWord\TemplateProcessor('templates/reporte.docx');
+        }
+        else {
+            $document = new \PhpOffice\PhpWord\TemplateProcessor('templates/sinAdicional.docx');
+        }
         $document->setValue('nombre_cliente', htmlspecialchars($datos->nombre));
         $document->setValue('fecha', htmlspecialchars("$now->day/$now->month/$now->year"));
         $document->setValue('total', htmlspecialchars($datos->total));

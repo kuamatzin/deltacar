@@ -81,9 +81,8 @@
 <h3>Servicios</h3>
 <div id="servicios">
     @if($edit)
-
         @foreach($ordenes->servicio_nombre as $key => $ad)
-            <div id="quitar_{{$key+2}}" class="row"><div class="form-group col-md-4"><select name="servicio_nombre[]" id="inputSer" class="form-control" required="required">
+            <div id="servicio_quitar_{{$key+2}}" class="row"><div class="form-group col-md-4"><select name="servicio_nombre[]" id="inputSer" class="form-control" required="required">
                 <option value="Afinación Mayor" @if($ad == 'Afinación Mayor') selected @endif>Afinación Mayor</option>
                 <option value="Cambio de Aceite" @if($ad == 'Cambio de Aceite') selected @endif>Cambio de Aceite</option>
                 <option value="Frenos" @if($ad == 'Frenos') selected @endif>Frenos</option>

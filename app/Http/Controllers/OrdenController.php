@@ -103,6 +103,9 @@ class OrdenController extends Controller
         $report_generator = new ReportGenerator;
         $request['archivo_cotizacion'] = $report_generator->createReport($request, $this->incluye);
         $pdf = CloudConvert::file('reportes/' . $request['archivo_cotizacion'] . '.docx')->to('pdf');
+        if ($request->adicional == null) {
+            $request['adicional'] = '';
+        }
         $ordenes->update($request->all());
         return redirect('ordenes');
     }

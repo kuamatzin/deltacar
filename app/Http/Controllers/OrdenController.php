@@ -17,11 +17,13 @@ class OrdenController extends Controller
      * @var array
      */
     protected $incluye = [
-        'Afinación Mayor' => ['Cambio de Aceite', 'Filtro de Aceite', 'Filtro de Aire', 'Filtro de Gasolina', 'Cambio de Bujías', 'Lavado de Inyectores', 'Lavado del Cuerpo de Aceleración'],
-        'Cambio de Aceite' => ['Aceite', 'Filtro de Aceite'],
-        'Frenos' => ['Cambio de Balatas', 'Rectificación de Discos'],
-        'Acumulador' => ['Cambio de batería'],
-        'Diagnóstico' => ['Diagnóstico y Análisis por Computadora']
+        'Afinación Maoyr'       => '',
+        'Afinación 4 Cilindros' => '-Cambio de AceitelineBreak-Cambio de filtros (aceite, aire y gasolina)lineBreak-Cambio de bujíaslineBreak-Un presurizado para lavado de inyectoreslineBreak-Un carbuclean para lavado del cuerpo de aceleraciónlineBreak-Un carbuclean para lavado del cuerpo de aceleraciónlineBreak-Revisión de sistema de frenoslineBreak-Revisión de sistema de frenoslineBreak-Revisión de suspensiónlineBreak-Revisión de suspensiónlineBreak-Revisión de todos los niveles de líquidos del vehículolineBreak-Revisión de luces',
+        'Afinación 6 Cilindros' => '-Cambio de AceitelineBreak-Cambio de filtros (aceite, aire y gasolina)lineBreak-Cambio de bujíaslineBreak-Un presurizado para lavado de inyectoreslineBreak-Un carbuclean para lavado del cuerpo de aceleraciónlineBreak-Un carbuclean para lavado del cuerpo de aceleraciónlineBreak-Revisión de sistema de frenoslineBreak-Revisión de sistema de frenoslineBreak-Revisión de suspensiónlineBreak-Revisión de suspensiónlineBreak-Revisión de todos los niveles de líquidos del vehículolineBreak-Revisión de luces',
+        'Cambio de Aceite'      => '-AceitelineBreak-Filtro de Aceite',
+        'Frenos'                => '-Cambio de BalataslineBreak-Rectificación de Discos',
+        'Acumulador'            => '-Cambio de batería',
+        'Diagnóstico'           => '-Diagnóstico y Análisis por Computadora'
     ];
     /**
      * Create a new controller instance.

@@ -48,16 +48,12 @@ class ReportGenerator
 
         $document->cloneRow('servicio', count($datos->servicio_nombre));
         $i = 0;
-        foreach ($datos->servicio_nombre as $key => $servicio_nombre) { 
+        foreach ($datos->servicio_nombre as $key => $servicio_nombre) {
             $value = $i + 1;
             $document->setValue("servicio#$value", htmlspecialchars($servicio_nombre));
             $document->setValue("cantidad#$value", htmlspecialchars($datos->servicio_cantidad[$key]));
             $document->setValue("costo#$value", htmlspecialchars($datos->servicio_costo[$key]));
-            $listado = '';
-            foreach ($incluye[$servicio_nombre] as $key => $adicional) {
-                $listado = $listado . '* ' . $adicional;
-            }
-            $document->setValue("incluye#$value", htmlspecialchars($listado));
+            $document->setValue("incluye#$value", htmlspecialchars($incluye[$servicio_nombre]));
             $i++;
         }
         if (count($datos->adicional) > 0) {

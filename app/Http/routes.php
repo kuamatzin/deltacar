@@ -10,4 +10,6 @@ Route::get('/reporte/{orden}', 'OrdenController@reporte');
 
 Route::get('/reporte/descarga/{orden}', 'OrdenController@descargaReporte');
 
+Route::get('/sendEmail/{nombre}/{email}', 'OrdenController@sendEmail');
+
 Route::auth();

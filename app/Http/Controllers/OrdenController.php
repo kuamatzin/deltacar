@@ -8,6 +8,7 @@ use App\Orden;
 use App\Services\ReportGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use RobbieP\CloudConvertLaravel\Facades\CloudConvert;
 
 class OrdenController extends Controller
@@ -32,7 +33,7 @@ class OrdenController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'reporte']);
+        $this->middleware('auth', ['except' => ['reporte', 'sendEmail']]);
     }
 
     /**
@@ -138,5 +139,16 @@ class OrdenController extends Controller
     {
         $orden = Orden::findOrFail($orden);
         return response()->download('reportes/' . $orden->archivo_cotizacion . '.pdf');
+    }
+
+    public function sendEmail($nombre, $email)
+    {
+        $user['nombre'] = $nombre;
+        $user['email'] = $email;
+        Mail::send('emails.nuevaPregunta', ['user' => $user], function ($m) use ($user) {
+            $m->from('contacto@winu.mx', 'Winu');
+
+            $m->to($user['email'], $user['nombre'])->subject('Nueva pregunta en Winu!');
+        });
     }
 }

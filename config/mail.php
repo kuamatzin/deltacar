@@ -29,7 +29,9 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    //'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => 'smtp.gmail.com',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +44,8 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    //'port' => env('MAIL_PORT', 587),
+    'port' => 465,
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +58,9 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    //'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'contacto@winu.mx', 'name' => 'Winu'],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +73,8 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    //'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => 'ssl',
 
     /*
     |--------------------------------------------------------------------------
@@ -81,7 +87,8 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => 'kuamatzin@gmail.com',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -94,7 +101,7 @@ return [
     |
     */
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => 'cUf*Jut$Cuc=Uf',
 
     /*
     |--------------------------------------------------------------------------

@@ -87,7 +87,7 @@ return [
     |
     */
 
-    'username' => 'kuamatzin@gmail.com',
+    'username' => 'winu.team@gmail.com',
 
 
     /*
@@ -101,7 +101,7 @@ return [
     |
     */
 
-    'password' => 'cUf*Jut$Cuc=Uf',
+    'password' => 'cocoypecas',
 
     /*
     |--------------------------------------------------------------------------

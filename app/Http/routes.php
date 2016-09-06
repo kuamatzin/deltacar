@@ -15,7 +15,14 @@ Route::get('/sendEmail/{nombre}/{email}', ['middleware' => 'cors', function($nom
 {
     $array = array("mensaje" => "Hola desde otro punto de la red"); //Por ejemplo
     if(isset($_GET['callback'])){ // Si es una petición cross-domain  
-      echo $_GET['callback'].'('.json_encode($array).')';
+        $user['nombre'] = $nombre;
+        $user['email'] = $email;
+        Mail::send('emails.nuevaPregunta', ['user' => $user], function ($m) use ($user) {
+            $m->from('contacto@winu.mx', 'Winu');
+
+            $m->to($user['email'], $user['nombre'])->subject('Nueva pregunta en Winu!');
+        });
+        echo $_GET['callback'].'('.json_encode($array).')';
     }
     else // Si es una normal, respondemos de forma normal  
       echo json_encode($array);

@@ -13,13 +13,12 @@ Route::get('/reporte/descarga/{orden}', 'OrdenController@descargaReporte');
 
 Route::get('/sendEmail/{nombre}/{email}', ['middleware' => 'cors', function($nombre, $email)
 {
-    $user['nombre'] = $nombre;
-    $user['email'] = $email;
-    Mail::send('emails.nuevaPregunta', ['user' => $user], function ($m) use ($user) {
-        $m->from('contacto@winu.mx', 'Winu');
-
-        $m->to($user['email'], $user['nombre'])->subject('Nueva pregunta en Winu!');
-    });
+    $array = array("mensaje" => "Hola desde otro punto de la red"); //Por ejemplo
+    if(isset($_GET['callback'])){ // Si es una petición cross-domain  
+      echo $_GET['callback'].'('.json_encode($array).')';
+    }
+    else // Si es una normal, respondemos de forma normal  
+      echo json_encode($array);
 }]);
 
 Route::auth();

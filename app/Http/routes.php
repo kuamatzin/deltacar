@@ -35,10 +35,10 @@ Route::get('/sendEmailRespuesta/{nombre}/{email}/{mensaje}', ['middleware' => 'c
         $user['nombre'] = $nombre;
         $user['email'] = $email;
         $user['mensaje'] = $mensaje;
-        Mail::send('emails.nuevaPregunta', ['user' => $user], function ($m) use ($user) {
+        Mail::send('emails.responderPregunta', ['user' => $user], function ($m) use ($user) {
             $m->from('contacto@winu.mx', 'Winu');
 
-            $m->to($user['email'], $user['nombre'])->subject($user['mensaje']);
+            $m->to($user['email'], $user['nombre'])->subject('Respuesta a tu pregunta en Winu');
         });
         echo $_GET['callback'].'('.json_encode($array).')';
     }

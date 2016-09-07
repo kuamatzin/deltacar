@@ -42,8 +42,17 @@ Route::get('/sendEmailRespuesta/{nombre}/{email}/{mensaje}', ['middleware' => 'c
         });
         echo $_GET['callback'].'('.json_encode($array).')';
     }
-    else // Si es una normal, respondemos de forma normal  
-      echo json_encode($array);
+    else // Si es una normal, respondemos de forma normal
+        $user['nombre'] = $nombre;
+        $user['email'] = $email;
+        $user['mensaje'] = $mensaje;
+        Mail::send('emails.responderPregunta', ['user' => $user], function ($m) use ($user) {
+            $m->from('contacto@winu.mx', 'Winu');
+
+            $m->to($user['email'], $user['nombre'])->subject('Respuesta a tu pregunta en Winu');
+        });
+        echo $_GET['callback'].'('.json_encode($array).')';
+        echo json_encode($array);
 }]);
 
 Route::auth();

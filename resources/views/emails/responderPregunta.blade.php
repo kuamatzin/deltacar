@@ -1,1 +1,1 @@
-<h3>Respuesta a tu pregunta en Winu</h3>
+<h3>Respuesta a tu pregunta en Winu: {{$user['mensaje']}}</h3>

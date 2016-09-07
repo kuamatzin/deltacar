@@ -28,13 +28,14 @@ Route::get('/sendEmail/{nombre}/{email}', ['middleware' => 'cors', function($nom
       echo json_encode($array);
 }]);
 
-Route::get('/sendEmailRespuesta/{nombre}/{email}/{mensaje}', ['middleware' => 'cors', function($nombre, $email, $mensaje)
+Route::get('/sendEmailRespuesta/{nombre}/{email}/{mensaje}/{pregunta}', ['middleware' => 'cors', function($nombre, $email, $mensaje, $pregunta)
 {
     $array = array("mensaje" => "Mensaje enviado"); //Por ejemplo
     if(isset($_GET['callback'])){ // Si es una petición cross-domain  
         $user['nombre'] = $nombre;
         $user['email'] = $email;
         $user['mensaje'] = $mensaje;
+        $user['pregunta'] = $pregunta;
         Mail::send('emails.responderPregunta', ['user' => $user], function ($m) use ($user) {
             $m->from('contacto@winu.mx', 'Winu');
 
